@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050505">
+<meta name="description" content="Wylder — a personal archive of leadership, creation, and the people who made the journey matter.">
+<title>Wylder — A Quiet Kind of Legacy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#050505;--fg:#f4f1eb;--muted:#8e8b85;--line:rgba(244,241,235,.15);--soft:rgba(244,241,235,.055);--serif:Georgia,'Times New Roman',serif;--display:'Manrope',sans-serif;--body:'DM Sans',sans-serif;--mono:'DM Mono',monospace;--ease:cubic-bezier(.2,.75,.2,1);box-sizing:border-box}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.75 var(--body);overflow-x:hidden}
+body.lock{overflow:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--fg);outline-offset:5px}
+::selection{background:var(--fg);color:var(--bg)}
+#grain{position:fixed;inset:0;z-index:8;pointer-events:none;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E")}
+#glow{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(520px circle at var(--x,50%) var(--y,30%),rgba(255,255,255,.065),transparent 72%)}
+#progress{position:fixed;z-index:30;top:0;left:0;width:100%;height:2px;transform-origin:left;transform:scaleX(0);background:var(--fg)}
+.wrap{width:min(100% - 3rem,1000px);margin-inline:auto;position:relative;z-index:2}
+.topbar{position:fixed;z-index:20;inset:0 0 auto;border-bottom:1px solid transparent;transition:background .35s,border-color .35s,backdrop-filter .35s}
+.topbar.scrolled{background:rgba(5,5,5,.78);backdrop-filter:blur(16px);border-color:var(--line)}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between}
+.brand{font:700 .92rem var(--display);letter-spacing:.13em;text-transform:uppercase}
+.brand span{color:var(--muted);font-weight:400}
+.navlinks{display:flex;gap:1.6rem;align-items:center}
+.navlinks a{font-size:.8rem;color:var(--muted);transition:color .25s}
+.navlinks a:hover,.navlinks a.active{color:var(--fg)}
+.menu-toggle{display:none;background:none;color:var(--fg);border:1px solid var(--line);border-radius:50%;width:42px;height:42px;cursor:pointer}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:8rem 0 5rem;position:relative}
+.eyebrow{display:flex;align-items:center;gap:.7rem;color:var(--muted);font:400 .7rem var(--mono);letter-spacing:.16em;text-transform:uppercase}
+.eyebrow:before{content:"";width:26px;height:1px;background:var(--muted)}
+.hero h1{font:300 clamp(4.4rem,17vw,11.7rem)/.88 var(--display);letter-spacing:-.095em;margin:1.7rem 0 1.5rem;max-width:100%;overflow-wrap:anywhere}
+.hero h1 span{display:inline-block;transition:transform .45s var(--ease),opacity .45s}
+.hero h1 span:hover{transform:translateY(-.08em)}
+.hero .subtitle{font:italic clamp(1.3rem,3.4vw,2rem)/1.35 var(--serif);color:#c8c4bc;max-width:620px;margin:0}
+.hero .intro{max-width:470px;color:var(--muted);font-size:.98rem;margin:1.4rem 0 0}
+.hero-bottom{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:4rem}
+.pill-button{display:inline-flex;align-items:center;gap:.85rem;padding:.85rem 1.15rem;border:1px solid var(--line);border-radius:100px;background:transparent;color:var(--fg);cursor:pointer;transition:background .3s,color .3s,border-color .3s,transform .3s}
+.pill-button:hover{background:var(--fg);color:var(--bg);border-color:var(--fg);transform:translateY(-2px)}
+.pill-button .arrow{display:inline-block;transition:transform .3s}
+.pill-button:hover .arrow{transform:translate(3px,-3px)}
+.scroll-note{font:400 .68rem var(--mono);letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.hero-mark{position:absolute;right:0;top:26%;width:clamp(80px,14vw,150px);aspect-ratio:1;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--muted);font:400 .65rem var(--mono);letter-spacing:.12em;animation:slowturn 32s linear infinite}
+.hero-mark:before,.hero-mark:after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:var(--fg)}
+.hero-mark:before{top:10%;left:24%}.hero-mark:after{bottom:13%;right:17%;width:4px;height:4px}
+@keyframes slowturn{to{transform:rotate(360deg)}}
+section{padding:7rem 0;border-top:1px solid var(--line);scroll-margin-top:4rem}
+.section-head{display:grid;grid-template-columns:130px 1fr;gap:2rem;margin-bottom:3rem}
+.kicker{color:var(--muted);font:400 .7rem var(--mono);letter-spacing:.14em;text-transform:uppercase;padding-top:.45rem}
+h2{font:400 clamp(2rem,5vw,3.7rem)/1.08 var(--display);letter-spacing:-.065em;margin:0}
+.about-copy{max-width:720px;margin-left:auto}
+.about-copy p{font-size:clamp(1.05rem,2vw,1.25rem);line-height:1.9;color:#c8c4bc;margin:0 0 1.35rem}
+.about-copy p:first-child:first-letter{font:italic 3.5rem/.8 var(--serif);float:left;padding:.12em .14em 0 0;color:var(--fg)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3.5rem}
+.stat{border-top:1px solid var(--line);padding:1.1rem .2rem}
+.stat b{display:block;font:300 clamp(2.2rem,6vw,4rem)/1 var(--display);letter-spacing:-.07em}
+.stat span{display:block;margin-top:.7rem;color:var(--muted);font-size:.78rem;max-width:150px;line-height:1.5}
+.chips{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:2.5rem}
+.chip{border:1px solid var(--line);border-radius:99px;padding:.42rem .85rem;color:#c8c4bc;font-size:.78rem;transition:background .25s,border-color .25s,color .25s,transform .25s}
+.chip:hover{background:var(--soft);border-color:rgba(244,241,235,.5);color:var(--fg);transform:translateY(-2px)}
+.timeline{position:relative;margin-left:calc(130px + 2rem);border-top:1px solid var(--line)}
+details{border-bottom:1px solid var(--line);transition:background .3s}
+details[open]{background:linear-gradient(90deg,rgba(255,255,255,.045),transparent 70%)}
+summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:90px 1fr 28px;align-items:center;gap:1rem;padding:1.45rem .6rem;min-height:94px}
+summary::-webkit-details-marker{display:none}
+.year{font:400 .7rem var(--mono);color:var(--muted)}
+.entry-title{font:500 clamp(1rem,2vw,1.2rem) var(--display);letter-spacing:-.025em}
+.entry-sub{display:block;color:var(--muted);font-size:.82rem;margin-top:.2rem}
+.plus{width:27px;height:27px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;font-size:1.15rem;font-weight:300;transition:transform .35s,background .35s,color .35s}
+details[open] .plus{transform:rotate(45deg);background:var(--fg);color:var(--bg)}
+.more{padding:0 3.2rem 1.6rem calc(90px + 1rem);max-width:720px;color:#bdb9b1;font-size:.96rem;animation:reveal .45s var(--ease)}
+.more p{margin:0 0 .75rem}
+.more p:last-child{margin-bottom:0}
+@keyframes reveal{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.quote-section{padding:8rem 0}
+.quote{max-width:780px;margin:0 auto;text-align:center}
+.quote .mark{font:italic 5rem/.7 var(--serif);color:var(--muted)}
+.quote blockquote{font:italic clamp(1.8rem,5.4vw,4.2rem)/1.25 var(--serif);letter-spacing:-.035em;margin:1.5rem 0}
+.quote p{color:var(--muted);font:400 .68rem var(--mono);letter-spacing:.14em;text-transform:uppercase}
+.social-grid{display:flex;flex-wrap:wrap;gap:.7rem;margin-left:calc(130px + 2rem)}
+.social{display:inline-flex;align-items:center;gap:.8rem;border:1px solid var(--line);border-radius:99px;padding:.8rem 1.05rem;min-height:50px;transition:background .3s,color .3s,border-color .3s,transform .3s}
+.social:hover{background:var(--fg);color:var(--bg);border-color:var(--fg);transform:translateY(-3px)}
+.social svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.social .label{font-size:.82rem}
+.social .out{font-size:.8rem;opacity:.55;transition:transform .25s}
+.social:hover .out{transform:translate(2px,-2px)}
+.contact-note{color:var(--muted);font-size:.9rem;margin:1.5rem 0 0 calc(130px + 2rem)}
+footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--muted);font-size:.76rem}
+.footer-row{display:flex;justify-content:space-between;gap:1rem;align-items:center}
+.footer-top{border:0;background:none;color:var(--muted);cursor:pointer;font:400 .7rem var(--mono);text-transform:uppercase;letter-spacing:.1em;transition:color .2s}
+.footer-top:hover{color:var(--fg)}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+#intro{position:fixed;inset:0;z-index:50;background:#050505;display:grid;place-items:center;transition:transform 1.05s cubic-bezier(.77,0,.18,1),visibility 1.05s;cursor:pointer}
+#intro.gone{transform:translateY(-101%);visibility:hidden;pointer-events:none}
+.intro-inner{text-align:center}
+.intro-word{font:600 clamp(2.3rem,10vw,6rem)/1 var(--display);letter-spacing:.12em;display:flex;justify-content:center}
+.intro-word span{opacity:0;transform:translateY(18px);filter:blur(8px);animation:letterIn .65s forwards var(--ease)}
+@keyframes letterIn{to{opacity:1;transform:none;filter:none}}
+.intro-caption{font:400 .65rem var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:1.4rem}
+.intro-bar{position:absolute;left:50%;bottom:18%;width:min(220px,50vw);height:1px;background:var(--line);transform:translateX(-50%);overflow:hidden}
+.intro-bar i{display:block;height:100%;background:var(--fg);transform:translateX(-100%);animation:fill 2.5s .2s forwards linear}
+@keyframes fill{to{transform:translateX(0)}}
+#intro small{position:absolute;bottom:calc(8% + env(safe-area-inset-bottom,0px));color:var(--muted);font:400 .65rem var(--mono);letter-spacing:.12em;text-transform:uppercase}
+#toast{position:fixed;z-index:40;left:50%;bottom:calc(1.5rem + env(safe-area-inset-bottom,0px));transform:translate(-50%,160%);opacity:0;background:var(--fg);color:var(--bg);padding:.75rem 1.15rem;border-radius:99px;font-size:.82rem;transition:transform .35s var(--ease),opacity .35s;pointer-events:none;white-space:nowrap}
+#toast.on{transform:translate(-50%,0);opacity:1}
+@media(max-width:700px){
+ .wrap{width:min(100% - 2rem,1000px)}.nav{height:64px}.menu-toggle{display:grid;place-items:center}.navlinks{display:none;position:absolute;top:63px;left:0;right:0;padding:1rem;background:rgba(5,5,5,.96);border-bottom:1px solid var(--line);flex-direction:column;gap:0;align-items:stretch}.navlinks.open{display:flex}.navlinks a{padding:.85rem .2rem;font-size:.95rem}
+ .hero{padding-top:7rem}.hero-mark{top:auto;bottom:18%;right:2%;width:76px;font-size:.55rem}.hero-bottom{align-items:flex-start;flex-direction:column;margin-top:2.5rem}.scroll-note{display:none}
+ section{padding:5rem 0}.section-head{grid-template-columns:1fr;gap:.8rem;margin-bottom:2.2rem}.timeline,.social-grid,.contact-note{margin-left:0}
+ summary{grid-template-columns:54px 1fr 28px;gap:.7rem;padding:1.2rem .15rem}.more{padding:0 .5rem 1.4rem calc(54px + .7rem)}.stats{gap:.7rem}.stat span{font-size:.72rem}
+ .quote-section{padding:5.5rem 0}.footer-row{align-items:flex-start;flex-direction:column}.footer-top{padding:0}
+}
+@media(max-width:390px){.stats{grid-template-columns:1fr}.stat{display:flex;align-items:center;gap:1rem}.stat b{min-width:90px}.stat span{margin-top:0}.hero h1{font-size:clamp(3.8rem,19vw,5rem)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+
+.hero h1 span{opacity:0}
+body.ready .hero h1 span{opacity:1;animation:rise 1.1s var(--ease) backwards}
+@keyframes rise{from{opacity:0;transform:translateY(80%) rotate(8deg);filter:blur(12px)}}
+.hero-in{opacity:0}
+body.ready .hero-in{opacity:1;animation:fadeUp 1s var(--ease) backwards;animation-delay:var(--d,0s)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}}
+.eyebrow:before{transform-origin:left}
+body.ready .eyebrow:before{animation:grow 1.2s .3s var(--ease) backwards}
+@keyframes grow{from{transform:scaleX(0)}}
+.roles{font:400 .85rem var(--mono);letter-spacing:.08em;margin:1.3rem 0 0;min-height:1.5em}
+.caret{display:inline-block;width:1px;height:1em;background:var(--fg);margin-left:3px;vertical-align:-.12em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero-mark{translate:0 var(--py,0px)}
+.entry-title{display:inline-block;transition:transform .45s var(--ease)}
+summary:hover .entry-title{transform:translateX(10px)}
+.year{transition:color .3s}summary:hover .year{color:var(--fg)}
+details.key{background:var(--soft)}
+details.key .year::after{content:"";display:inline-block;width:5px;height:5px;margin-left:.45rem;border-radius:50%;background:var(--fg);vertical-align:middle;animation:blink 1.6s ease-in-out infinite}
+.qw{opacity:.16;transition:opacity .5s}.qw.on{opacity:1}
+.social-grid{gap:1rem}
+.social{width:62px;height:62px;min-height:0;padding:0;justify-content:center;position:relative}
+.social svg{width:22px;height:22px}
+.social .label,.social .out{display:none}
+.social::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:1px solid var(--fg);opacity:0;pointer-events:none}
+.social:hover::after{animation:ring .9s var(--ease)}
+@keyframes ring{from{opacity:.7;transform:scale(1)}to{opacity:0;transform:scale(1.7)}}
+#cursor{position:fixed;z-index:60;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;border:1px solid #fff;border-radius:50%;pointer-events:none;mix-blend-mode:difference;opacity:0;transition:opacity .3s,width .3s,height .3s,margin .3s,background .3s}
+#cursor.on{opacity:1}
+#cursor.big{width:72px;height:72px;margin:-36px 0 0 -36px;background:#fff}
+.hero h1{font-family:'Unbounded','Arial Black',sans-serif;font-weight:800;font-size:clamp(3rem,13.5vw,9.2rem);line-height:1.05;letter-spacing:-.045em}
+body.ready .hero h1 span{opacity:1;animation:rise 1.1s var(--ease) backwards,shine 5s linear infinite;animation-delay:calc(.25s + var(--i)*.08s),calc(2.6s + var(--i)*.14s);background:linear-gradient(110deg,#f4f1eb 35%,#6f6c66 50%,#f4f1eb 65%) 0 0/300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+@keyframes shine{0%,50%{background-position:0 0}100%{background-position:100% 0}}
+.stat b{font-family:'Unbounded','Arial Black',sans-serif;font-weight:800;font-size:clamp(1.7rem,6vw,3.3rem);letter-spacing:-.04em;transform-origin:left bottom}
+.stat b.done{animation:pop .7s var(--ease)}
+@keyframes pop{40%{transform:scale(1.14)}}
+.about-copy p:last-child{font-family:var(--serif);font-style:italic;color:var(--fg)}
+.section-head h2{grid-column:2}
+@media(max-width:700px){.section-head h2{grid-column:1}}
+@media(prefers-reduced-motion:reduce){.qw{opacity:1}.hero h1 span,.hero-in{opacity:1}#cursor{display:none}}
+</style>
+</head>
+<body class="lock">
+<div id="intro" role="button" aria-label="Enter the website" tabindex="0">
+  <div class="intro-inner"><div class="intro-word" id="welcome" aria-label="Welcome"></div><div class="intro-caption" id="cap">Opening the archive</div></div>
+  <div class="intro-bar"><i></i></div><small>Tap anywhere to skip</small>
+</div>
+<div id="grain"></div><div id="glow"></div><div id="progress"></div>
+<div class="topbar" id="topbar"><div class="wrap nav">
+  <a class="brand" href="#home" aria-label="Wylder home">W<span> / </span>Y</a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+  <nav class="navlinks" id="navlinks" aria-label="Main navigation"><a href="#home">Home</a><a href="#about">About</a><a href="#journey">Journey</a><a href="#contact">Contact</a></nav>
+</div></div>
+<main>
+<div class="wrap">
+<header class="hero" id="home">
+  <div class="eyebrow">Wylder · Roblox &amp; Type Soul · Leader, editor, founder</div>
+  <h1 id="name" aria-label="Wylder"></h1>
+  <p class="subtitle">I build the rooms people end up calling home.<br>Then I stay to keep the lights on.</p>
+  <p class="roles"><span id="typed"></span><i class="caret"></i></p>
+  <p class="intro">Across Roblox and Type Soul I’ve led squads, started clans and run a server of 200+ people. Some of it lasted, some of it didn’t, and all of it shaped me. This is the honest version.</p>
+  <div class="hero-bottom"><button class="pill-button" id="storyBtn">Read my story <span class="arrow">↗</span></button><span class="scroll-note">Scroll to begin</span></div>
+  <div class="hero-mark" aria-hidden="true">STILL<br>BECOMING</div>
+</header>
+
+<section id="about" class="about">
+  <div class="section-head reveal"><h2>More than the titles beside my name.</h2></div>
+  <div class="about-copy reveal">
+    <p>I’m J. Wylder. I have spent much of my life building worlds within worlds — gathering strangers beneath a common banner, leading a ranger company, editing its story, founding guilds and clans, and tending to a community that grew beyond two hundred voices.</p>
+    <p>I have known the warmth of a beginning, when every name is a stranger and every promise feels eternal. I have also known the silence that follows. A clan that faded into stillness. A guild whose doors closed against me. A server reduced to nothing but the memory of what once stood there.</p>
+    <p>I carry these things without shame. Not every kingdom is meant to last, and not every banner is destined to fly forever. Some things fall so that we may learn what was worth building in the first place. Even ruins have something to teach the hands that raised them.</p>
+    <p>I have never believed that a title makes a leader, nor that a crown makes a king. Titles are ink upon a page; crowns are metal, heavy only for as long as someone wears them. What matters is what remains when both are taken away — the people who remember, the promises kept in silence, and the work done when there is no one left to witness it.</p>
+    <p>For in the end, I would rather be remembered for the hands I extended than the heights I reached, for the people I stood beside than the names I stood above.</p>
+    <p>The banners may fall. The halls may empty. But what we leave in others is a legacy no ruin can bury.</p>
+  </div>
+  <div class="stats reveal">
+    <div class="stat"><b data-n="5">1</b><span>communities led or co-founded</span></div>
+    <div class="stat"><b data-n="200" data-plus>1</b><span>members in my largest community</span></div>
+    <div class="stat"><b data-n="3">1</b><span>games I’ve built something in</span></div>
+  </div>
+  <div class="chips reveal"><span class="chip">Leadership</span><span class="chip">Editing</span><span class="chip">Team support</span><span class="chip">Community building</span><span class="chip">Creative work</span><span class="chip">Founder</span><span class="chip">Roblox</span><span class="chip">Type Soul</span><span class="chip">Peroxide</span></div>
+</section>
+
+<section id="journey">
+  <div class="section-head reveal"><h2>Every community<br>I’ve led or built.</h2></div>
+  <div class="timeline">
+<details><summary><span class="year">CH. 01</span><span><span class="entry-title">8th Ranger Company</span><span class="entry-sub">Blackhawk Rescue Mission · Roblox</span></span><span class="plus">+</span></summary><div class="more"><p>I was co-leader, the company’s editor and a Master Sergeant (MSG). Three titles, one real job: be the person who supports everyone else. I handled the editing, backed up the squad and kept things moving when momentum slipped.</p><p>Leadership is rarely one big moment. It’s a hundred small ones nobody claps for.</p></div></details>
+<details><summary><span class="year">CH. 02</span><span><span class="entry-title">Counter Bread</span><span class="entry-sub">Game guild · Peroxide</span></span><span class="plus">+</span></summary><div class="more"><p>I co-founded this guild and grew into one of its top members, someone people in Peroxide could count on.</p><p>It ended with my banishment. I won’t pretend that didn’t hurt, and I won’t pretend it never happened. It taught me that helping build a place and belonging to it forever are two different things.</p></div></details>
+<details><summary><span class="year">CH. 03</span><span><span class="entry-title">Apostles of Fight</span><span class="entry-sub">Clan · Type Soul</span></span><span class="plus">+</span></summary><div class="more"><p>I co-founded this Type Soul clan. It didn’t last, and eventually it went inactive.</p><p>Starting it still showed me how much work, and how many people, it takes to get something off the ground.</p></div></details>
+<details><summary><span class="year">CH. 04</span><span><span class="entry-title">Story of the Paradise</span><span class="entry-sub">Server · 200+ members</span></span><span class="plus">+</span></summary><div class="more"><p>I built and ran a community of more than two hundred people. For a while it was a place people came back to: a small world made of conversations, shared time and familiar names.</p><p>Then someone nuked it. Losing it taught me that building something and protecting it are separate skills, and that an ending can still leave you with knowledge worth keeping.</p></div></details>
+<details><summary><span class="year">CH. 05</span><span><span class="entry-title">The work behind the scenes</span><span class="entry-sub">Editing · Support · Collaboration</span></span><span class="plus">+</span></summary><div class="more"><p>Not every contribution needs a spotlight. Sometimes it’s editing, organizing, helping a teammate, or making sure the work gets done when nobody is watching.</p><p>Those quieter roles shaped how I create: less interested in being seen doing the work, more interested in leaving something better than I found it.</p></div></details>
+<details class="key"><summary><span class="year">CH. 06</span><span><span class="entry-title">Order of Veyros</span><span class="entry-sub">Type Soul clan · Owner</span></span><span class="plus">+</span></summary><div class="more"><p>The one I’ll always be grateful for. Veyros helped me through my life, and it gave me far more than a place to play.</p><p>As its owner, I tried to give back what it gave me. The things worth building are never only about the builder. They’re about the people who give them life.</p></div></details>
+  </div>
+</section>
+
+<section class="quote-section reveal" aria-label="Personal reflection">
+  <div class="quote"><div class="mark">“</div><blockquote>What we build may not last forever. What we learn while building it can.</blockquote><p>A note to myself</p></div>
+</section>
+
+<section id="contact">
+  <div class="section-head reveal"><h2>If our paths cross,<br>say hello.</h2></div>
+  <div class="social-grid reveal">
+    <a class="social" href="https://discord.gg/pZtGS562su" target="_blank" rel="noopener noreferrer" data-soc="Discord" aria-label="Discord"><svg viewBox="0 0 24 24"><path d="M7 6c-2 1-3.5 4-4 9 1.5 2 3.5 3 5 3l1-2m8-10c2 1 3.5 4 4 9-1.5 2-3.5 3-5 3l-1-2M8 7.5c2.5-1 5.5-1 8 0M7.5 16c3 1 6 1 9 0"/><circle cx="9" cy="12" r="1.2" fill="currentColor"/><circle cx="15" cy="12" r="1.2" fill="currentColor"/></svg><span class="label">Discord</span><span class="out">↗</span></a>
+    <a class="social" href="https://www.roblox.com/users/1882923995/profile" target="_blank" rel="noopener noreferrer" data-soc="Roblox" aria-label="Roblox"><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="1.5" transform="rotate(15 12 12)"/><rect x="10.2" y="10.2" width="3.6" height="3.6" transform="rotate(15 12 12)"/></svg><span class="label">Roblox</span><span class="out">↗</span></a>
+    <a class="social" href="https://youtube.com/@wylderk?si=j-9NfheIhwtMgcqu" target="_blank" rel="noopener noreferrer" data-soc="YouTube" aria-label="YouTube"><svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg><span class="label">YouTube</span><span class="out">↗</span></a>
+    <a class="social" href="https://www.tiktok.com/@krysburn" target="_blank" rel="noopener noreferrer" data-soc="TikTok" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5M14 3c.3 2.6 2 4.3 5 4.5"/></svg><span class="label">TikTok</span><span class="out">↗</span></a>
+    <a class="social" href="https://www.instagram.com/wylderrz?srtk=eHZiaHpnMDZrbHV1" target="_blank" rel="noopener noreferrer" data-soc="Instagram" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r=".8" fill="currentColor"/></svg><span class="label">Instagram</span><span class="out">↗</span></a>
+  </div>
+  <p class="contact-note reveal">Choose a door. I’ll be on the other side.</p>
+</section>
+</div>
+</main>
+<footer><div class="wrap footer-row"><span>Wylder · Still becoming.</span><span>Made of moments, lessons, and second beginnings.</span><button class="footer-top" id="topBtn">Back to the beginning ↑</button></div></footer>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+ const body=document.body, intro=document.getElementById('intro');
+ const welcome=document.getElementById('welcome');
+ 'WELCOME'.split('').forEach((c,i)=>{const s=document.createElement('span');s.textContent=c;s.style.animationDelay=(.12+i*.1)+'s';welcome.appendChild(s)});
+ const name=document.getElementById('name');
+ 'Wylder'.split('').forEach((c,i)=>{const s=document.createElement('span');s.textContent=c;s.style.setProperty('--i',i);name.appendChild(s)});
+ let finished=false;
+ function finish(){if(finished)return;finished=true;intro.classList.add('gone');body.classList.remove('lock');setTimeout(()=>{body.classList.add('ready');setTimeout(type,1500)},reduced?0:450);}
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const timer=setTimeout(finish,reduced?250:3000);
+ intro.addEventListener('click',()=>{clearTimeout(timer);finish()});
+ intro.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();clearTimeout(timer);finish()}});
+ document.getElementById('storyBtn').addEventListener('click',()=>document.getElementById('about').scrollIntoView({behavior:reduced?'auto':'smooth'}));
+ document.getElementById('topBtn').addEventListener('click',()=>window.scrollTo({top:0,behavior:reduced?'auto':'smooth'}));
+ const topbar=document.getElementById('topbar'),progress=document.getElementById('progress');
+ function scrollEffects(){const max=document.documentElement.scrollHeight-innerHeight;progress.style.transform='scaleX('+(max>0?scrollY/max:0)+')';topbar.classList.toggle('scrolled',scrollY>24);document.documentElement.style.setProperty('--py',(scrollY*.18)+'px');quoteScroll()}
+ window.addEventListener('scroll',scrollEffects,{passive:true});scrollEffects();
+ const toggle=document.getElementById('menuToggle'),nav=document.getElementById('navlinks');
+ toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Close navigation':'Open navigation');toggle.textContent=open?'×':'☰'});
+ nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Open navigation');toggle.textContent='☰'}));
+ const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){const t=entry.target;t.classList.add('visible');revealObserver.unobserve(t);setTimeout(()=>{t.classList.remove('reveal','visible');t.style.transitionDelay=''},1800)}}),{threshold:.12});
+ document.querySelectorAll('.stats,.chips,.timeline').forEach(p=>{p.classList.remove('reveal');[...p.children].forEach((c,i)=>{c.classList.add('reveal');c.style.transitionDelay=(i*90)+'ms'})});
+ document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+ let counted=false;
+ const statObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting&&!entry.target.dataset.done){entry.target.dataset.done='1';const el=entry.target,end=Number(el.dataset.n),start=performance.now(),duration=reduced?1:2400;function step(now){const p=Math.min((now-start)/duration,1),eased=1-Math.pow(1-p,3);el.textContent=Math.max(1,Math.round(1+(end-1)*eased))+(p===1&&el.hasAttribute('data-plus')?'+':'');if(p===1)el.classList.add('done');if(p<1)requestAnimationFrame(step)}requestAnimationFrame(step)}}),{threshold:.3});
+ document.querySelectorAll('[data-n]').forEach(el=>statObserver.observe(el));
+ const sections=[...document.querySelectorAll('main section[id]')],links=[...nav.querySelectorAll('a')];
+ const activeObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+entry.target.id))}}),{rootMargin:'-35% 0px -55% 0px'});
+ sections.forEach(s=>activeObserver.observe(s));
+ const glow=document.getElementById('glow');
+ window.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;glow.style.setProperty('--x',e.clientX+'px');glow.style.setProperty('--y',e.clientY+'px')},{passive:true});
+ const details=[...document.querySelectorAll('details')];
+ details.forEach(d=>d.addEventListener('toggle',()=>{if(d.open)details.forEach(other=>{if(other!==d)other.open=false})}));
+ let toastTimer;const toast=document.getElementById('toast');
+ document.querySelectorAll('.social').forEach(a=>a.addEventListener('click',e=>{if(a.getAttribute('href')==='#'){e.preventDefault();toast.textContent=a.dataset.soc+' link isn’t added yet';toast.classList.add('on');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('on'),2200)}}));
+
+ const cap=document.getElementById('cap'),lines=['Opening the archive','Gathering the chapters','Almost there'],t0=performance.now();
+ (function tick(now){if(finished)return;const p=Math.min((now-t0)/3000,1);cap.textContent=lines[Math.min(2,Math.floor(p*3))]+' · '+Math.round(p*100)+'%';if(p<1)requestAnimationFrame(tick)})(t0);
+ ['.eyebrow','.subtitle','.roles','.intro','.hero-bottom'].forEach((q,i)=>{const el=document.querySelector('.hero '+q);el.classList.add('hero-in');el.style.setProperty('--d',[.1,.9,1.1,1.25,1.45][i]+'s')});
+ const typed=document.getElementById('typed'),roles=['Co-leader.','Editor.','Master Sergeant.','Founder.','Owner of Order of Veyros.'];let ri=0,ci=0,del=false;
+ function type(){const w=roles[ri];ci+=del?-1:1;typed.textContent=w.slice(0,ci);let t=del?35:75;if(!del&&ci===w.length){del=true;t=1400}else if(del&&ci===0){del=false;ri=(ri+1)%roles.length;t=350}setTimeout(type,t)}
+ var qw,qEl=document.querySelector('blockquote');
+ if(qEl){qw=qEl.textContent.trim().split(/\s+/).map(w=>{const s=document.createElement('span');s.className='qw';s.textContent=w;return s});qEl.textContent='';qw.forEach((s,i)=>{if(i)qEl.append(' ');qEl.append(s)})}
+ function quoteScroll(){if(!qw)return;const r=qEl.getBoundingClientRect(),p=Math.min(Math.max((innerHeight*.85-r.top)/(innerHeight*.45),0),1),n=Math.round(p*qw.length);qw.forEach((s,i)=>s.classList.toggle('on',i<n))}
+ quoteScroll();
+ const hs=[...document.querySelectorAll('#name span')],hn=document.getElementById('name');
+ if(!reduced){
+  hn.addEventListener('pointermove',e=>hs.forEach(s=>{const r=s.getBoundingClientRect(),d=Math.abs(e.clientX-(r.left+r.width/2)),k=Math.max(0,1-d/170);s.style.transform='translateY('+(-k*.16)+'em) scale('+(1+k*.08)+')'}));
+  hn.addEventListener('pointerleave',()=>hs.forEach(s=>s.style.transform=''));
+ }
+ if(matchMedia('(hover:hover) and (pointer:fine)').matches&&!reduced){
+  const c=document.createElement('div');c.id='cursor';document.body.appendChild(c);
+  let tx=0,ty=0,cx=0,cy=0;
+  addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;c.classList.add('on')},{passive:true});
+  (function loop(){cx+=(tx-cx)*.18;cy+=(ty-cy)*.18;c.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(loop)})();
+  document.addEventListener('pointerover',e=>c.classList.toggle('big',!!e.target.closest('a,button,summary,.chip')));
+  document.querySelectorAll('.pill-button,.social,.footer-top').forEach(b=>{
+   b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.25)+'px,'+((e.clientY-r.top-r.height/2)*.35)+'px)'});
+   b.addEventListener('pointerleave',()=>{b.style.transform=''});
+  });
+ }
+})();
+</script>
+</body>
+</html>
