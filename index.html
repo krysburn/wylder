@@ -157,6 +157,9 @@ body.ready .hero h1 span{opacity:1;animation:rise 1.1s var(--ease) backwards,shi
 @keyframes pop{40%{transform:scale(1.14)}}
 .about-copy p:last-child{font-family:var(--serif);font-style:italic;color:var(--fg)}
 .section-head h2{grid-column:2}
+#contact .section-head{display:block;text-align:center}
+#contact .social-grid{margin-left:0;justify-content:center}
+#contact .contact-note{margin-left:0;text-align:center}
 @media(max-width:700px){.section-head h2{grid-column:1}}
 @media(prefers-reduced-motion:reduce){.qw{opacity:1}.hero h1 span,.hero-in{opacity:1}#cursor{display:none}}
 </style>
@@ -193,6 +196,7 @@ body.ready .hero h1 span{opacity:1;animation:rise 1.1s var(--ease) backwards,shi
     <p>I have never believed that a title makes a leader, nor that a crown makes a king. Titles are ink upon a page; crowns are metal, heavy only for as long as someone wears them. What matters is what remains when both are taken away — the people who remember, the promises kept in silence, and the work done when there is no one left to witness it.</p>
     <p>For in the end, I would rather be remembered for the hands I extended than the heights I reached, for the people I stood beside than the names I stood above.</p>
     <p>The banners may fall. The halls may empty. But what we leave in others is a legacy no ruin can bury.</p>
+
   </div>
   <div class="stats reveal">
     <div class="stat"><b data-n="5">1</b><span>communities led or co-founded</span></div>
@@ -279,6 +283,7 @@ body.ready .hero h1 span{opacity:1;animation:rise 1.1s var(--ease) backwards,shi
  if(qEl){qw=qEl.textContent.trim().split(/\s+/).map(w=>{const s=document.createElement('span');s.className='qw';s.textContent=w;return s});qEl.textContent='';qw.forEach((s,i)=>{if(i)qEl.append(' ');qEl.append(s)})}
  function quoteScroll(){if(!qw)return;const r=qEl.getBoundingClientRect(),p=Math.min(Math.max((innerHeight*.85-r.top)/(innerHeight*.45),0),1),n=Math.round(p*qw.length);qw.forEach((s,i)=>s.classList.toggle('on',i<n))}
  quoteScroll();
+
  const hs=[...document.querySelectorAll('#name span')],hn=document.getElementById('name');
  if(!reduced){
   hn.addEventListener('pointermove',e=>hs.forEach(s=>{const r=s.getBoundingClientRect(),d=Math.abs(e.clientX-(r.left+r.width/2)),k=Math.max(0,1-d/170);s.style.transform='translateY('+(-k*.16)+'em) scale('+(1+k*.08)+')'}));
